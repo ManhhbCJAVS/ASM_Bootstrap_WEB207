@@ -1,0 +1,226 @@
+<!-- Phần view -->
+<div class="container-fluid pb-4 pt-3  " style="background-color: #FFF4D6">
+    <div class="container bg-white rounded-3 pt-3">
+        <!-- carousel + Banner  -->
+        <div class="row">
+            <div class="col-lg-8 col-12  ">
+                <div id="carouselExampleControls" class="carousel slide " data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <!-- Lặp ảnh carousel -->
+                        <div ng-repeat="value in listCarousel" class="carousel-item active">
+                            <img ng-src=" {{value.name_image_carousel}} " class="d-block w-100 rounded-top " alt="..."
+                                style="width: 400px; height: 300px;">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-4 d-lg-flex flex-column d-sm-none pe-2 p-0 ">
+                <!-- Lặp banner -->
+                <img ng-repeat="value in listBanner " ng-src=" {{value.name_image_carousel}} "
+                    class=" w-100 h-100 rounded-3 mt-2" alt="">
+            </div>
+        </div>
+
+        <div class="row p-3"> <!-- HotSale cuối tuần -->
+            <div class="col-12 bg-danger rounded-3 ">
+                <div class="d-flex flex-row align-items-end justify-content-between  "> <!-- title -->
+                    <div>
+                        <ul class="nav nav-pills  " id="pills-tab" role="tablist">
+                            <li class="nav-item me-3 " role="presentation">
+                                <button class="nav-link active  rounded-4 fs-5 fw-bold " id="pills-dienThoai-tab"
+                                    data-bs-toggle="pill" data-bs-target="#pills-dienThoai" type="button" role="tab"
+                                    aria-controls="pills-dienThoai" aria-selected="true">Điện
+                                    thoại</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link  rounded-4 fs-5 fw-bold " id="pills-phuKien-tab"
+                                    data-bs-toggle="pill" data-bs-target="#pills-phuKien" type="button" role="tab"
+                                    aria-controls="pills-phuKien" aria-selected="false">Phụ
+                                    kiện</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img class="w-100 h-100" src="../images/images_Hotsale_weekend/hs-cuoi-tuan-tet-text.webp"
+                            alt="">
+                    </div>
+                    <div class="d-flex flex-nowrap justify-content-center  ">
+                        <span class="">Kết thúc sau</span>
+                        <div>:
+                            <span class=" bg-warning rounded-2 p-1 me-1 fw-bold" ng-bind="timeHotSale.days"></span>
+                        </div>
+                        <div>:
+                            <span class=" bg-warning rounded-2 p-1 me-1 fw-bold" ng-bind="timeHotSale.hours"></span>
+                        </div>
+                        <div>:
+                            <span class=" bg-warning rounded-2 p-1 me-1 fw-bold" ng-bind="timeHotSale.minutes"></span>
+                        </div>
+                        <div>:
+                            <span class=" bg-warning rounded-2 p-1 me-1 fw-bold" ng-bind="timeHotSale.seconds"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content" id="pills-tabContent"> <!-- Sản phẩm hotSale  -->
+                    <div class="tab-pane fade show active" id="pills-dienThoai" role="tabpanel"
+                        aria-labelledby="pills-dienThoai-tab" tabindex="0"> <!-- Điện thoại -->
+                        <!-- Phần content -->
+                        <div class="all_Product row d-flex flex-row mt-4 mb-3">
+                            <!-- lặp trog danh sách ListProduct -->
+                            <div class="col" ng-repeat=" (index, value ) in listProduct.slice(2,6) ">
+                                <div class="card">
+                                    <!-- Đường dẫn theo ID -->
+                                    <a href="#!/product/{{value.id}}" class=" d-flex justify-content-center">
+                                        <img ng-src="{{value.urlImg}}" class="card-img-top w-75" alt="...">
+                                    </a>
+                                    <div class="card-body">
+                                        <div class="card-product-title d-flex justify-content-between ">
+                                            <h5>{{value.namePro}}</h5>
+                                            <span class="text-info fw-bold"> -{{value.sale}}%</span>
+                                        </div>
+                                        <div class="inf-cost">
+                                            <p class="card-text mb-2">
+                                                <span class="text-decoration-line-through text-secondary">
+                                                    Giá gốc : {{value.costPro | currency:'': 0 }}₫</span>
+                                                <span class="text-danger fw-bold ">{{value.costPro * (value.sale/100) |
+                                                    currency : '₫' : 0 }}₫
+                                                </span>
+                                            </p>
+                                            <span class="fw-semibold fs-5">Đã bán : {{value.sold_quantity }} </span>
+                                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                                <span>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-regular fa-star"></i>
+                                                </span>
+                                                <div>
+                                                    <span class="fw-light " style="font-family: Roboto,sans-serif;">Yêu
+                                                        thích</span>
+                                                    <i class="fa-solid fa-heart"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-phuKien" role="tabpanel" aria-labelledby="pills-phuKien-tab"
+                tabindex="0"> <!-- Phụ kiện -->
+
+            </div>
+        </div>
+        <div class="row d-flex flex-column align-items-center mt-2 mb-2"><!-- Điện thoại nổi bật -->
+            <div class="col-12">
+                <div class="d-xl-flex justify-content-between align-items-center ">
+                    <a class="text-decoration-none " href="#">
+                        <h2 class="d-block "
+                            style="font-family: Roboto , sans-serif ; color: #444; font-weight: 600; line-height: 40px;">
+                            ĐIỆN THOẠI NỔI BẬT
+                            NHẤT</h2>
+                    </a>
+                    <div id="product-brands"><!-- Thương hiệu -->
+                        <a href="#">Apple</a>
+                        <a href="#">Sumsung</a>
+                        <a href="#">OPPO</a>
+                        <a href="#">ASUS</a>
+                        <a href="#">Xiaomi</a>
+                        <a href="#">TECNO</a>
+                        <a href="#">oneplus</a>
+                    </div>
+                </div>
+            </div>
+            <div class="popular-phone mt-4 mb-3 gap-2" style="display: flex; flex-wrap: wrap">
+                <div class="" ng-repeat=" (index , value ) in listProduct" style="width: 318px">
+                    <!-- Lặp phần sản phẩm nổi bật -->
+                    <div class="card">
+                        <!-- Truy sản phẩm theo ID -->
+                        <a href="#!/product/{{value.id}}" class=" d-flex justify-content-center">
+                            <img ng-src="{{value.urlImg}}" class="card-img-top w-75" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <div class="card-product-title d-flex justify-content-between ">
+                                <h5>{{value.namePro}}</h5>
+                                <span class="text-info fw-bold"> -{{value.sale}}%</span>
+                            </div>
+                            <div class="inf-cost">
+                                <p class="card-text mb-2">
+                                    <span class="text-decoration-line-through text-secondary">
+                                        Giá gốc : {{value.costPro | currency:'': 0 }}₫</span>
+                                    <span class="text-danger fw-bold ">{{value.costPro * (value.sale/100) |
+                                        currency : '₫' : 0 }}₫
+                                    </span>
+                                </p>
+                                <span class="fw-semibold fs-5">Đã bán : {{ }} </span>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <span>
+                                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                            class="fa-regular fa-star"></i>
+                                    </span>
+                                    <div>
+                                        <span class="fw-light " style="font-family: Roboto,sans-serif;">Yêu
+                                            thích</span>
+                                        <i class="fa-solid fa-heart"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="wrapperBtn d-flex justify-content-center mb-4">
+                    <button class="btn ">Xem thêm điện thoại</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row"> <!-- Phụ kiện  -->
+            <div class="col-12">
+                <div class="row">
+                    <div class="d-xl-flex justify-content-between align-items-center ">
+                        <a class="text-decoration-none " href="#">
+                            <h2 class="d-block "
+                                style="font-family: Roboto , sans-serif ; color: #444; font-weight: 600; line-height: 40px;">
+                                Phụ Kiện
+                            </h2>
+                        </a>
+                        <div id="product-brands"><!-- Thương hiệu -->
+                            <a href="#">Apple</a>
+                            <a href="#">Sumsung</a>
+                            <a href="#">OPPO</a>
+                            <a href="#">ASUS</a>
+                            <a href="#">Xiaomi</a>
+                            <a href="#">TECNO</a>
+                            <a href="#">oneplus</a>
+                        </div>
+                    </div>
+                </div>
+                <div class=" gap-2 ps-2 pe-2" style="display: flex ; flex-wrap: wrap;">
+                    <!-- repeat accessory -->
+                    <div class="p-0 product-phuKien" ng-repeat="( index , value ) in ListAccessory ">
+                        <a href="#!/product" class=" d-block  text-decoration-none  rounded-3 align-items-start p-1"
+                            style="background-image: url( {{value.name_image_accessory}} ); height: 125px; width: 125px; ">
+                            <span style="font-family: Roboto, sans-serif;"> {{value.name}} </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div><!-- Phụ kiện  -->
+    </div><!-- End ng-view -->
+</div>
+<link rel="stylesheet" href="/css/home.css">

@@ -1,0 +1,15 @@
+{
+  "name": "asm_manh",
+  "version": "1.0.0",
+  "description": "asm",
+  "main": "route.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "manh",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^1.0.0-alpha.23",
+    "uuid": "^9.0.1"
+  }
+}
